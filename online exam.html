@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Exam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        label {
+            margin-left: 10px;
+        }
+        #score {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Online Exam</h1>
+    <form id="examForm">
+        <!-- Question 1 -->
+        <div class="question">
+            <h3>1. What is the capital of France?</h3>
+            <input type="radio" id="q1a" name="q1" value="Paris">
+            <label for="q1a">Paris</label><br>
+            <input type="radio" id="q1b" name="q1" value="London">
+            <label for="q1b">London</label><br>
+            <input type="radio" id="q1c" name="q1" value="Berlin">
+            <label for="q1c">Berlin</label><br>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <h3>2. Who wrote 'Romeo and Juliet'?</h3>
+            <input type="radio" id="q2a" name="q2" value="Shakespeare">
+            <label for="q2a">Shakespeare</label><br>
+            <input type="radio" id="q2b" name="q2" value="Dickens">
+            <label for="q2b">Dickens</label><br>
+            <input type="radio" id="q2c" name="q2" value="Hemingway">
+            <label for="q2c">Hemingway</label><br>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <h3>3. What is the largest planet in our Solar System?</h3>
+            <input type="radio" id="q3a" name="q3" value="Jupiter">
+            <label for="q3a">Jupiter</label><br>
+            <input type="radio" id="q3b" name="q3" value="Earth">
+            <label for="q3b">Earth</label><br>
+            <input type="radio" id="q3c" name="q3" value="Mars">
+            <label for="q3c">Mars</label><br>
+        </div>
+
+        <button type="button" onclick="submitExam()">Submit Exam</button>
+    </form>
+
+    <div id="score" class="result"></div>
+
+    <script>
+       
+        const correctAnswers = {
+            q1: 'Paris',
+            q2: 'Shakespeare',
+            q3: 'Jupiter'
+        };
+
+        function submitExam() {
+            let score = 0;
+            const form = document.getElementById('examForm');
+            for (let question in correctAnswers) {
+                const userAnswer = form.querySelector(`input[name="${question}"]:checked`);
+                if (userAnswer && userAnswer.value === correctAnswers[question]) {
+                    score++;
+                }
+        }
+            const resultDiv = document.getElementById('score');
+            resultDiv.textContent = `You scored ${score} out of 3.
+            if (score === 3) {
+                resultDiv.style.color = 'green';
+                resultDiv.textContent += ' Excellent!';
+            } else if (score === 2) {
+                resultDiv.style.color = 'orange';
+                resultDiv.textContent += ' Good job!';
+            } else {
+                resultDiv.style.color = 'red';
+                resultDiv.textContent += ' Try again!';
+            }
+        }
+    </script>
+
+</body>
+</html>
+
